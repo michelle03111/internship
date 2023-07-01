@@ -1,0 +1,28 @@
+import os
+from selenium import webdriver
+
+# Mendapatkan path absolut untuk Chromedriver
+chromedriver_path = os.path.abspath("chromedriver")
+
+# Set path Chromedriver sebagai environment variable
+os.environ["webdriver.chrome.driver"] = chromedriver_path
+
+# Membuat instance WebDriver untuk Chrome
+driver = webdriver.Chrome()
+
+# Membuka halaman Jubelio
+driver.get('https://jubelio.com')
+
+# Cari dan isi elemen input email dan password berdasarkan ID
+username_input = driver.find_element_by_id('email')
+password_input = driver.find_element_by_id('password')
+
+username_input.send_keys('qa.rakamin.jubelio@gmail.com')
+password_input.send_keys('Jubelio123!')
+
+# Cari tombol login menggunakan XPath dan klik
+login_button = driver.find_element_by_xpath('//button[contains(text(), "Login")]')
+login_button.click()
+
+# Menutup browser dan mengakhiri sesi WebDriver
+driver.quit()
